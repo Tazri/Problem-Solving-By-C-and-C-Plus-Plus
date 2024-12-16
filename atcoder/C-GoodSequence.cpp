@@ -1,4 +1,4 @@
-// link : https://codeforces.com/contest/44/problem/A
+// link : https://atcoder.jp/contests/arc087/tasks/arc087_a
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -18,34 +18,41 @@ typedef double dl;
 int main()
 {
     optimize();
-
     int n;
-    vector<pair<string, string>> li;
-    cin >> n;
+    unordered_map<int, int> count;
 
+    int r = 0;
+    int nm;
+    cin >> n;
     for (int i = 0; i < n; i++)
     {
-        pair<string, string> flower;
+        cin >> nm;
 
-        cin >> flower.first >> flower.second;
-
-        bool isFound = false;
-
-        for (pair<string, string> fl : li)
+        if (count.find(nm) == count.end())
         {
-            if (fl == flower)
-            {
-                isFound = true;
-                break;
-            }
+            count[nm] = 1;
         }
-
-        if (!isFound)
+        else
         {
-            li.push_back(flower);
+            if (count[nm] < nm)
+            {
+                count[nm]++;
+            }
+            else
+            {
+                r++;
+            }
         }
     }
 
-    cout << li.size() << endl;
+    for (auto pair : count)
+    {
+        if (pair.first != pair.second)
+        {
+            r += pair.second;
+        }
+    }
+
+    cout << r << endl;
     return 0;
 }
