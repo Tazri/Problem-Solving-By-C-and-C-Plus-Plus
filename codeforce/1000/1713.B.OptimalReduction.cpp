@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/1713/B
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -19,25 +20,32 @@ void program()
     int n;
     cin >> n;
     vector<int> arr(n);
+    int li = 1;
     cin >> arr[0];
-    int mn = arr[0];
+
     for (int i = 1; i < n; i++)
     {
-        cin >> arr[i];
-        mn = min(arr[i], mn);
+        int ai;
+        cin >> ai;
+
+        if (arr[li - 1] != ai)
+        {
+            arr[li++] = ai;
+        }
     }
 
-    if (n <= 2)
+    li--;
+
+    if (li == 0)
     {
         cout << "YES" << endl;
         return;
     }
-    // is sorted
+
     bool isDecending = true;
     bool isAcending = true;
-    int ai = 0;
-    int di = 0;
-    for (int i = 1; i < n; i++)
+
+    for (int i = 1; i <= li; i++)
     {
         if (arr[i - 1] > arr[i])
         {
@@ -50,19 +58,45 @@ void program()
         }
     }
 
-    if (isDecending || isAcending)
+    if (isAcending || isDecending)
     {
         cout << "YES" << endl;
         return;
     }
+
+    int pl = 0;
+
+    for (int i = 1; i <= li; i++)
+    {
+        if (arr[i - 1] > arr[i])
+        {
+            pl = i - 1;
+            break;
+        }
+    }
+
+    int rl = 0;
+    for (int i = li; i > 0; i--)
+    {
+        if (arr[i - 1] < arr[i])
+        {
+            rl = i;
+            break;
+        }
+    }
+
+    if (rl == pl)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 
 int main()
 {
     optimize();
-    // int t;
-    // cin >> t;
-    // while (t--)
-    program();
+    int t;
+    cin >> t;
+    while (t--)
+        program();
     return 0;
 }

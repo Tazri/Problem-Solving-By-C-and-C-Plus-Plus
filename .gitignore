@@ -4,3 +4,6 @@ exe
 output/
 output
 /output
+/analysis
+analysis/
+analysis
