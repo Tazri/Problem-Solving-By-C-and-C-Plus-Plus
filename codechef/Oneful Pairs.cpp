@@ -1,3 +1,4 @@
+// link : https://www.codechef.com/problems/ONEFULPAIRS
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -14,25 +15,22 @@ typedef double dl;
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
-void print_digits(int n)
+void program()
 {
-    if (n / 10 == 0)
-    {
-        cout << n << " ";
-        return;
-    }
+    int a, b;
+    cin >> a >> b;
 
-    int d = n % 10;
-    n /= 10;
-    print_digits(n);
-    cout << d << " ";
+    int res = a + b + (a * b);
+
+    if (res == 111)
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
 }
 
 int main()
 {
     optimize();
-    int x;
-    cin >> x;
-    print_digits(x);
+    program();
     return 0;
 }

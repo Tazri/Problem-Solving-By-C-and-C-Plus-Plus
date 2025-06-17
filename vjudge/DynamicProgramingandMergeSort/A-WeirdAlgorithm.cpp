@@ -14,25 +14,28 @@ typedef double dl;
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
-void print_digits(int n)
+void program()
 {
-    if (n / 10 == 0)
-    {
-        cout << n << " ";
-        return;
-    }
+    ll n;
+    cin >> n;
 
-    int d = n % 10;
-    n /= 10;
-    print_digits(n);
-    cout << d << " ";
+    cout << n;
+
+    while (n > 1)
+    {
+        if (n & 1)
+            n = (n * 3) + 1;
+        else
+            n /= 2;
+
+        cout << " " << n;
+    }
+    cout << endl;
 }
 
 int main()
 {
     optimize();
-    int x;
-    cin >> x;
-    print_digits(x);
+    program();
     return 0;
 }
