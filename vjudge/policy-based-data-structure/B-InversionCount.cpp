@@ -23,44 +23,41 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 
 void program()
 {
-    ordered_set<int> os;
-    int q;
-    cin >> q;
 
-    while (q--)
+    ll n;
+    cin >> n;
+    vector<ll> arr(n);
+    ordered_set<ll> os;
+
+    for (ll &ai : arr)
+        cin >> ai;
+
+    ll ans = 0;
+
+    for (ll ai : arr)
     {
-        char ch;
-        int x;
-        cin >> ch >> x;
-
-        if (ch == 'I')
-            os.insert(x);
-        else if (ch == 'D')
-        {
-            if (os.find(x) != os.end())
-                os.erase(x);
-        }
-        else if (ch == 'K')
-        {
-            if (os.size() < x)
-            {
-                cout << "invalid" << endl;
-            }
-            else
-            {
-                cout << *os.find_by_order(x - 1) << endl;
-            }
-        }
-        else
-        {
-            cout << os.order_of_key(x) << endl;
-        }
+        ll less = os.order_of_key(ai);
+        ll add = os.size() - less;
+        ans += add;
+        os.insert(ai);
     }
+
+    cout << ans << endl;
+    string tmp;
+    getline(cin, tmp);
 }
 
 int main()
 {
     optimize();
-    program();
+    ll t;
+    cin >> t;
+    string tmp;
+    getline(cin, tmp);
+
+    while (t--)
+    {
+        program();
+    }
     return 0;
 }

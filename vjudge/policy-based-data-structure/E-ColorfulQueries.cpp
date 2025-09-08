@@ -23,44 +23,42 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 
 void program()
 {
-    ordered_set<int> os;
-    int q;
-    cin >> q;
+    int n, q;
+    cin >> n >> q;
+    ordered_set<pair<int, int>> os;
+    vector<int> mp(n + 1, 0);
 
+    for (int i = 1; i <= n; i++)
+    {
+        int vi;
+        cin >> vi;
+
+        os.insert({i, vi});
+
+        if (mp[vi] == 0)
+            mp[vi] = i;
+    }
+
+    int id = 0;
     while (q--)
     {
-        char ch;
-        int x;
-        cin >> ch >> x;
-
-        if (ch == 'I')
-            os.insert(x);
-        else if (ch == 'D')
-        {
-            if (os.find(x) != os.end())
-                os.erase(x);
-        }
-        else if (ch == 'K')
-        {
-            if (os.size() < x)
-            {
-                cout << "invalid" << endl;
-            }
-            else
-            {
-                cout << *os.find_by_order(x - 1) << endl;
-            }
-        }
-        else
-        {
-            cout << os.order_of_key(x) << endl;
-        }
+        int qi;
+        cin >> qi;
+        int count = os.order_of_key({mp[qi], qi});
+        os.erase({mp[qi], qi});
+        os.insert({id, qi});
+        mp[qi] = id;
+        id--;
+        cout << count + 1 << endl;
     }
 }
 
 int main()
 {
     optimize();
-    program();
+    int t;
+    cin >> t;
+    while (t--)
+        program();
     return 0;
 }
