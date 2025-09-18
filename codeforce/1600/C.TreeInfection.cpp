@@ -14,74 +14,151 @@ typedef double dl;
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
+void getV(int n, vector<int> &v)
+{
+    vector<int> input(n + 1, 0);
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        int fi;
+        cin >> fi;
+        input[fi]++;
+    }
+
+    vector<int> freq(n + 1, 0);
+
+    for (int i = 0; i <= n; i++)
+    {
+        if (input[i])
+            freq[input[i]]++;
+    }
+
+    v.reserve(n);
+
+    for (int i = n; i >= 1; i--)
+    {
+        if (freq[i])
+            for (int t = 0; t < freq[i]; t++)
+                v.push_back(i);
+    }
+}
+
+void getReduce(int n, vector<int> &v, vector<int> &left)
+{
+    int rm = v.size();
+    for (int i = 0; i < v.size(); i++)
+    {
+        v[i] -= rm;
+        v[i] = max(0, v[i]);
+        rm--;
+    }
+
+    for (int i = 0; i < v.size(); i++)
+    {
+        v[i]--;
+        v[i] = max(0, v[i]);
+    }
+
+    left.reserve(v.size());
+    vector<int> freq(n + 1);
+
+    for (int i = 0; i < v.size(); i++)
+    {
+        if (v[i] > 0)
+            freq[v[i]]++;
+    }
+
+    for (int i = 1; i <= n; i++)
+        if (freq[i])
+            for (int t = 0; t < freq[i]; t++)
+                left.push_back(i);
+}
+
 void program()
 {
     int n;
     cin >> n;
-    vector<int> freq(n + 1, 0);
-    freq[0] = 1;
-    for (int i = 0; i < n - 1; i++)
+    vector<int> v;
+    getV(n, v);
+
+    // cout << "nodes : " << endl;
+    // for (int &vi : v)
+    //     cout << vi << " ";
+    // cout << endl;
+
+    int ans = v.size() + 1;
+
+    vector<int> left;
+    left.reserve(n);
+    getReduce(n, v, left);
+
+    // cout << "minimum sec : " << ans << endl;
+    // cout << "left : " << endl;
+    // for (int li : left)
+    //     cout << li << " ";
+    // cout << endl;
+
+    int extra = 0;
+    // above all gone in o(n)
+    // now simulation time
+
+    if (left.size() == 0)
     {
-        int ai;
-        cin >> ai;
-        freq[ai]++;
+        cout << ans << endl;
+        return;
     }
 
-    vector<int> arr;
-    arr.reserve(n + 1);
+    int rm = 0;
+    vector<int> stk;
+    stk.reserve(n);
 
-    for (int fi : freq)
+    while (1)
     {
-        if (fi)
-            arr.push_back(fi);
-    }
-
-    sort(arr.rbegin(), arr.rend());
-
-    int sec = arr.size();
-
-    int rm = sec;
-    for (int i = 0; i < arr.size(); i++)
-    {
-        arr[i] = max(0, arr[i] - rm);
-        rm--;
-    }
-
-    reverse(arr.begin(), arr.end());
-    vector<int> last;
-    last.reserve(arr.size());
-    int sum = 0;
-    for (int ai : arr)
-        if (ai)
+        // initial check
+        if (stk.size() && left.size())
         {
-            last.emplace_back(ai);
-            sum += ai;
-        }
-
-    int gone = 0;
-    int d = last.size() + 1;
-    for (int i = 0; i < last.size(); i++)
-    {
-        last[i] -= gone;
-
-        while (last[i] <= 0)
-            continue;
-
-        while (last[i])
-        {
-            last[i]--;
-            gone++;
-            sum = max(sum - d, 0);
-
-            if (sum == 0)
+            int mx = max(stk.back(), left.back());
+            if (mx - rm <= 0)
                 break;
         }
-        if (sum == 0)
+        else if (left.back() - rm <= 0)
             break;
-        d--;
+
+        rm++;
+        extra++;
+        if (stk.size() == 0 || (left.size() && stk.back() < left.back()))
+        {
+            int mx = left.back();
+            left.pop_back();
+
+            if (mx - rm <= 0)
+                break;
+            mx -= 1;
+
+            if (left.size() == 0)
+                left.push_back(mx);
+            else if (left.size() || mx >= left.back())
+                left.push_back(mx);
+            else
+                stk.push_back(mx);
+            continue;
+        }
+
+        int mx = stk.back();
+        stk.pop_back();
+
+        if (mx - rm <= 0)
+            break;
+
+        mx -= 1;
+
+        if (left.size() == 0 || mx >= left.back())
+            left.push_back(mx);
+        else
+            stk.push_back(mx);
     }
 
-    cout << gone + sec << endl;
+    cout << ans + extra << endl;
 }
 
 int main()

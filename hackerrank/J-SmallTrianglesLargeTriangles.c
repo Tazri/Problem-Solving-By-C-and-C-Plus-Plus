@@ -1,3 +1,4 @@
+// link : https://www.hackerrank.com/challenges/small-triangles-large-triangles/problem
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

@@ -14,20 +14,32 @@ typedef double dl;
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
-struct Student
-{
-    int age;
-    string first_name;
-    string last_name;
-    int standard;
-};
+const ll mod = 1000000007;
 
 void program()
 {
-    Student s1;
-    cin >> s1.age >> s1.first_name >> s1.last_name >> s1.standard;
+    ll n;
+    cin >> n;
+    ll ans = 1;
+    ll b = 2;
+    while (n > 0)
+    {
+        if (n & 1)
+        {
+            ans *= b;
+            n--;
+        }
+        else
+        {
+            b *= b;
+            b %= mod;
+            n /= 2;
+        }
 
-    cout << s1.age << " " << s1.first_name << " " << s1.last_name << " " << s1.standard << endl;
+        ans = ans % mod;
+    }
+
+    cout << ans << endl;
 }
 
 int main()

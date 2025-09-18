@@ -14,34 +14,20 @@ typedef double dl;
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
-struct Point
-{
-    ll x;
-    ll y;
-    Point()
-    {
-        cin >> x;
-        cin >> y;
-    }
-};
-
 void program()
 {
-    Point p1, p2, p3;
+    int a, b, c;
 
-    ll cond = ((p3.x - p2.x) * (p2.y - p1.y)) - ((p2.x - p1.x) * (p3.y - p2.y));
+    cin >> a >> b >> c;
 
-    if (cond < 0)
-        cout << "LEFT" << endl;
-    else if (cond > 0)
-        cout << "RIGHT" << endl;
-    else
-        cout << "TOUCH" << endl;
+    int miss = a ^ b ^ c;
+    cout << miss << endl;
 }
 
 int main()
 {
     optimize();
+
     int t;
     cin >> t;
     while (t--)

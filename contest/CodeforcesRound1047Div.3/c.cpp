@@ -52,31 +52,17 @@ void program()
 
     if (isEven(b))
     {
-        vector<ll> allk;
         ll cb = b;
         ll ans = -1;
 
         if (isEven(a + b))
             ans = a + b;
 
-        while (isEven(cb))
-        {
-            allk.push_back(2);
-            cb /= 2;
-        }
-        allk.push_back(cb);
+        ll k = b / 2;
+        ll a1 = (a * k) + (b / k);
 
-        for (ll i = 1; i < allk.size() - 1; i++)
-        {
-            allk[i] *= allk[i - 1];
-        }
-
-        for (ll k : allk)
-        {
-            ll res = (a * k) + (b / k);
-            if (isEven(res))
-                ans = max(ans, res);
-        }
+        if (isEven(a1))
+            ans = max(ans, a1);
 
         cout << ans << endl;
         return;

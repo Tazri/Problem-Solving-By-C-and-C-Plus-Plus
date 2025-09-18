@@ -1,3 +1,4 @@
+// link : https://www.spoj.com/problems/PES16SO2/en/
 #include <stdio.h>
 #include <string.h>
 

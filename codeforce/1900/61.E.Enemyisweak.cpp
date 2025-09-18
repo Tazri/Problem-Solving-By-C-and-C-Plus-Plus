@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/61/E
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -21,43 +22,43 @@ using namespace __gnu_pbds;
 template <class T>
 using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+template <class T>
+using greaterordered_set = tree<T, null_type, greater<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
 void program()
 {
-
+    greaterordered_set<ll> leftOs;
+    ordered_set<ll> rightOs;
     ll n;
     cin >> n;
-    vector<ll> arr(n);
-    ordered_set<ll> os;
-
-    for (ll &ai : arr)
-        cin >> ai;
-
     ll ans = 0;
+    vector<ll> v(n);
 
-    for (ll ai : arr)
+    for (ll i = 0; i < n; i++)
     {
-        ll less = os.order_of_key(ai);
-        ll add = os.size() - less;
-        ans += add;
-        os.insert(ai);
+        cin >> v[i];
+        rightOs.insert(v[i]);
+    }
+
+    for (ll j = 0; j < n; j++)
+    {
+        rightOs.erase(v[j]);
+
+        ll leftCount = leftOs.order_of_key(v[j]);
+        ll rightCount = rightOs.order_of_key(v[j]);
+
+        ll res = leftCount * rightCount;
+        ans += res;
+
+        leftOs.insert(v[j]);
     }
 
     cout << ans << endl;
-    string tmp;
-    getline(cin, tmp);
 }
 
 int main()
 {
     optimize();
-    ll t;
-    cin >> t;
-    string tmp;
-    getline(cin, tmp);
-
-    while (t--)
-    {
-        program();
-    }
+    program();
     return 0;
 }

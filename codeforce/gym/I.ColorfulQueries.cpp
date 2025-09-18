@@ -1,3 +1,4 @@
+// link : https://codeforces.com/gym/104308/problem/I
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -21,43 +22,44 @@ using namespace __gnu_pbds;
 template <class T>
 using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-template <class T>
-using greaterordered_set = tree<T, null_type, greater<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 void program()
 {
-    greaterordered_set<ll> leftOs;
-    ordered_set<ll> rightOs;
-    ll n;
-    cin >> n;
-    ll ans = 0;
-    vector<ll> v(n);
+    int n, q;
+    cin >> n >> q;
+    ordered_set<pair<int, int>> os;
+    vector<int> mp(n + 1, 0);
 
-    for (ll i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
-        cin >> v[i];
-        rightOs.insert(v[i]);
+        int vi;
+        cin >> vi;
+
+        os.insert({i, vi});
+
+        if (mp[vi] == 0)
+            mp[vi] = i;
     }
 
-    for (ll j = 0; j < n; j++)
+    int id = 0;
+    while (q--)
     {
-        rightOs.erase(v[j]);
-
-        ll leftCount = leftOs.order_of_key(v[j]);
-        ll rightCount = rightOs.order_of_key(v[j]);
-
-        ll res = leftCount * rightCount;
-        ans += res;
-
-        leftOs.insert(v[j]);
+        int qi;
+        cin >> qi;
+        int count = os.order_of_key({mp[qi], qi});
+        os.erase({mp[qi], qi});
+        os.insert({id, qi});
+        mp[qi] = id;
+        id--;
+        cout << count + 1 << endl;
     }
-
-    cout << ans << endl;
 }
 
 int main()
 {
     optimize();
-    program();
+    int t;
+    cin >> t;
+    while (t--)
+        program();
     return 0;
 }
