@@ -1,0 +1,9 @@
+update grid : 
+xxxxxxx
+xxxxxxx
+xx#x#xx
+xx#xxxx
+xxx.xxx
+xxxxxxx
+xxxxxxx
+1
