@@ -1,3 +1,4 @@
+// link:  https://codeforces.com/problemset/problem/1761/A
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -16,40 +17,26 @@ typedef double dl;
 
 void program()
 {
-    int a, b, x, y;
-    cin >> a >> b >> x >> y;
+    int n, a, b;
+    cin >> n >> a >> b;
 
-    if (y < b)
+    if (a == b && n == a)
     {
-        cout << -1 << endl;
+        cout << "YES" << endl;
         return;
     }
 
-    int d = abs(x - y);
-    int ax = (y - d) - d;
-
-    if (a < ax)
+    if (a + b + 1 == n || a + b == n)
     {
-        cout << -1 << endl;
+        cout << "NO" << endl;
         return;
     }
 
-    int ans = 0;
-
-    if (a > ax)
-    {
-        ans += a - ax;
-        a -= ax;
-    }
-
-    int b = abs(y - b);
-    ax -= b;
-
-    ans += abs(y - b);
-
-    cout << ans << endl;
+    if (a + b <= n)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
-
 int main()
 {
     optimize();
