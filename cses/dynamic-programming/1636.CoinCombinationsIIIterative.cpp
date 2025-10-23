@@ -1,3 +1,4 @@
+// link : https://cses.fi/problemset/task/1636
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -14,43 +15,38 @@ typedef double dl;
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
+const int mod = 1e9 + 7;
+
 vector<int> c;
-
-int solve(int curr, int x, int i)
-{
-    if (curr == x)
-        return 1;
-    if (curr > x)
-        return 0;
-
-    if (i >= c.size())
-    {
-        return 0;
-    }
-
-    int sum = curr;
-
-    // take
-    sum += solve(curr + c[i], x, i);
-    sum += solve(curr, x, i + 1);
-
-    return sum;
-}
 
 void program()
 {
     int n, x;
     cin >> n >> x;
-
     c = vector<int>(n);
+
     for (int &ci : c)
         cin >> ci;
 
     sort(c.begin(), c.end());
 
-    int res = solve(0, x, 0);
+    vector<vector<int>> dp(n + 1, vector<int>(x + 1, 0));
 
-    cout << res << endl;
+    for (int i = 0; i < n; i++)
+        dp[i][0] = 1;
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        for (int j = 0; j <= x; j++)
+        {
+            if (j - c[i] >= 0)
+                dp[i][j] += dp[i + 1][j] + dp[i][j - c[i]];
+
+            dp[i][j] %= mod;
+        }
+    }
+
+    cout << dp[0][x] << endl;
 }
 
 int main()
