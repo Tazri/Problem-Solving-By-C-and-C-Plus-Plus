@@ -1,0 +1,5 @@
+mn : -1 rightmx : 1 rightmn : 1
+mn : -4 rightmx : 1 rightmn : -3
+mn : 0 rightmx : 1 rightmn : -3
+mn : -1 rightmx : 1 rightmn : -4
+1

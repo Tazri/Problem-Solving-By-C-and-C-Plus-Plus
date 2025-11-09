@@ -1,0 +1,45 @@
+// link : https://codeforces.com/problemset/problem/731/A
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef double dl;
+
+#define optimize()                \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0)
+#define fraction()                \
+    cout.unsetf(ios::floatfield); \
+    cout.precision(10);           \
+    cout.setf(ios::fixed, ios::floatfield)
+
+void program()
+{
+    string s;
+    cin >> s;
+
+    char now = 'a';
+    int ans = 0;
+    for (int i = 0; i < s.size(); i++)
+    {
+        int from = (int)now - (int)'a';
+        int to = (int)s[i] - (int)'a';
+
+        int d1 = ((from - to) % 26 + 26) % 26;
+        int d2 = ((to - from) % 26 + 26) % 26;
+
+        ans += min(d1, d2);
+        now = s[i];
+    }
+
+    cout << ans << endl;
+}
+
+int main()
+{
+    optimize();
+    program();
+    return 0;
+}
