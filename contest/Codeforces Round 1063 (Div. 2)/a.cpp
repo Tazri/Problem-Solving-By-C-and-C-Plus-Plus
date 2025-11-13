@@ -23,19 +23,20 @@ void program()
     for (int &vi : v)
         cin >> vi;
 
-    for (int i = 0; i < n; i++)
+    sort(v.begin(), v.end());
+
+    for (int i = 0; i < n - 1; i++)
     {
-        for (int j = i + 1; j < n; j++)
+        if (i & 1)
         {
-            if (v[j] % v[i] % 2 == 0)
+            if (v[i] != v[i + 1])
             {
-                cout << v[i] << " " << v[j] << endl;
+                cout << "NO" << endl;
                 return;
             }
         }
     }
-
-    cout << -1 << endl;
+    cout << "YES" << endl;
 }
 
 int main()
@@ -45,6 +46,5 @@ int main()
     cin >> t;
     while (t--)
         program();
-
     return 0;
 }

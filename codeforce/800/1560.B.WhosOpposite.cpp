@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/1560/B
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -16,29 +17,39 @@ typedef double dl;
 
 void program()
 {
-    int w, h, n;
-    cin >> w >> h >> n;
+    int a, b, c;
+    cin >> a >> b >> c;
 
-    int wcnt = 0;
-    int hcnt = 0;
-    while (w % 2 == 0)
+    int mn = min(a, b);
+    int mx = max(a, b);
+
+    int d = mx - mn - 1;
+    int n = 2 + (2 * d);
+
+    int hd = ((n - 2) / 2) + 1;
+
+    mn += hd;
+    mn %= n;
+    if (mn == 0)
+        mn = n;
+
+    if (mn != mx)
     {
-        wcnt++;
-        w /= 2;
+        cout << -1 << endl;
+        return;
     }
 
-    while (h % 2 == 0)
+    if (c > n)
     {
-        hcnt++;
-        h /= 2;
+        cout << -1 << endl;
+        return;
     }
 
-    int p = (wcnt + 1) * (hcnt + 1);
+    int ans = (c + d + 1) % n;
+    if (ans == 0)
+        ans = n;
 
-    if (p >= n)
-        cout << "YES" << endl;
-    else
-        cout << "NO" << endl;
+    cout << ans << endl;
 }
 
 int main()

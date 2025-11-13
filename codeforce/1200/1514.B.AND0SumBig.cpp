@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/1514/B
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -14,28 +15,29 @@ typedef double dl;
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
+const ll mod = 1e9 + 7;
+
+long long modpow(long long a, long long b, long long mod)
+{
+    long long res = 1;
+    a %= mod;
+    while (b > 0)
+    {
+        if (b & 1)
+            res = res * a % mod;
+        a = a * a % mod;
+        b >>= 1;
+    }
+    return res;
+}
+
 void program()
 {
-    int n;
-    cin >> n;
-    vector<int> v(n);
-
-    for (int &vi : v)
-        cin >> vi;
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (v[j] % v[i] % 2 == 0)
-            {
-                cout << v[i] << " " << v[j] << endl;
-                return;
-            }
-        }
-    }
-
-    cout << -1 << endl;
+    ll n, k;
+    cin >> n >> k;
+    ll ans = modpow(n, k, mod);
+    ans %= mod;
+    cout << ans << endl;
 }
 
 int main()
@@ -45,6 +47,5 @@ int main()
     cin >> t;
     while (t--)
         program();
-
     return 0;
 }

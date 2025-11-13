@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/1926/C
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -14,37 +15,43 @@ typedef double dl;
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
+ll sz = (2 * 1e5);
+
+ll digitSum(ll n)
+{
+    ll sum = 0;
+    while (n)
+    {
+        sum += (n % 10);
+        n /= 10;
+    }
+    return sum;
+}
+
+vector<ll> sum(sz + 123, 0);
+
+void build()
+{
+    for (int i = 1; i <= sz; i++)
+    {
+        sum[i] = sum[i - 1] + digitSum(i);
+    }
+};
+
 void program()
 {
-    int n;
+    ll n;
     cin >> n;
-    vector<int> v(n);
-
-    for (int &vi : v)
-        cin >> vi;
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (v[j] % v[i] % 2 == 0)
-            {
-                cout << v[i] << " " << v[j] << endl;
-                return;
-            }
-        }
-    }
-
-    cout << -1 << endl;
+    cout << sum[n] << endl;
 }
 
 int main()
 {
     optimize();
+    build();
     int t;
     cin >> t;
     while (t--)
         program();
-
     return 0;
 }

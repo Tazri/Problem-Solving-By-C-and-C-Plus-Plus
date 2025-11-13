@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/1790/A
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -14,28 +15,23 @@ typedef double dl;
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
+#define PI30 "3141592653589793238462643383279"
+
 void program()
 {
-    int n;
-    cin >> n;
-    vector<int> v(n);
+    string pi = PI30;
+    string s;
+    cin >> s;
 
-    for (int &vi : v)
-        cin >> vi;
-
-    for (int i = 0; i < n; i++)
+    int cnt = 0;
+    for (int i = 0; i < s.size(); i++)
     {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (v[j] % v[i] % 2 == 0)
-            {
-                cout << v[i] << " " << v[j] << endl;
-                return;
-            }
-        }
+        if (s[i] == pi[i])
+            cnt++;
+        else
+            break;
     }
-
-    cout << -1 << endl;
+    cout << cnt << endl;
 }
 
 int main()
@@ -45,6 +41,5 @@ int main()
     cin >> t;
     while (t--)
         program();
-
     return 0;
 }

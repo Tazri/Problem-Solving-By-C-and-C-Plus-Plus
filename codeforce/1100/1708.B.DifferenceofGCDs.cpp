@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/1708/B
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -16,26 +17,31 @@ typedef double dl;
 
 void program()
 {
-    int n;
-    cin >> n;
-    vector<int> v(n);
+    int n, l, r;
+    cin >> n >> l >> r;
+    vector<int> v(n + 1);
 
-    for (int &vi : v)
-        cin >> vi;
-
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
-        for (int j = i + 1; j < n; j++)
+        if (l % i == 0)
         {
-            if (v[j] % v[i] % 2 == 0)
-            {
-                cout << v[i] << " " << v[j] << endl;
-                return;
-            }
+            v[i] = l;
+            continue;
         }
+        int re = l % i;
+        int need = i - re;
+        int vi = l + need;
+        if (vi > r)
+        {
+            cout << "NO" << endl;
+            return;
+        }
+        v[i] = vi;
     }
 
-    cout << -1 << endl;
+    cout << "YES" << endl;
+    for (int i = 1; i <= n; i++)
+        cout << v[i] << " \n"[i == n];
 }
 
 int main()
@@ -45,6 +51,5 @@ int main()
     cin >> t;
     while (t--)
         program();
-
     return 0;
 }

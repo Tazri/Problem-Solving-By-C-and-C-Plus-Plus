@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/1527/B1
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -18,24 +19,23 @@ void program()
 {
     int n;
     cin >> n;
-    vector<int> v(n);
+    string s;
+    cin >> s;
+    int zero = 0;
+    for (char ch : s)
+        if (ch == '0')
+            zero++;
 
-    for (int &vi : v)
-        cin >> vi;
-
-    for (int i = 0; i < n; i++)
+    if (zero % 2 == 0)
     {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (v[j] % v[i] % 2 == 0)
-            {
-                cout << v[i] << " " << v[j] << endl;
-                return;
-            }
-        }
+        cout << "BOB" << endl;
+        return;
     }
 
-    cout << -1 << endl;
+    if (zero == 1)
+        cout << "BOB" << endl;
+    else
+        cout << "ALICE" << endl;
 }
 
 int main()
@@ -45,6 +45,5 @@ int main()
     cin >> t;
     while (t--)
         program();
-
     return 0;
 }

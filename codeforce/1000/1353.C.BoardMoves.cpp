@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/1353/C
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -16,35 +17,29 @@ typedef double dl;
 
 void program()
 {
-    int n;
+    ll n;
     cin >> n;
-    vector<int> v(n);
 
-    for (int &vi : v)
-        cin >> vi;
-
-    for (int i = 0; i < n; i++)
+    ll sum = 0;
+    ll l = n / 2;
+    ll cell = 1;
+    ll side = 1;
+    for (ll i = 1; i <= l; i++)
     {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (v[j] % v[i] % 2 == 0)
-            {
-                cout << v[i] << " " << v[j] << endl;
-                return;
-            }
-        }
+        cell = side * 4 + 4;
+        sum += (cell * i);
+        side += 2;
     }
 
-    cout << -1 << endl;
+    cout << sum << endl;
 }
 
 int main()
 {
     optimize();
-    int t;
+    ll t;
     cin >> t;
     while (t--)
         program();
-
     return 0;
 }
