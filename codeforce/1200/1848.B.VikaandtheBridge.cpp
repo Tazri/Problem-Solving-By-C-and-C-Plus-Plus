@@ -1,3 +1,4 @@
+// link : https://codeforces.com/contest/1848/problem/B
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -22,8 +23,7 @@ void program()
     for (int &vi : v)
         cin >> vi;
 
-    vector<int> mxsteptime(k + 1, 0);
-    vector<int> mxstep(k + 1, 1);
+    vector<vector<int>> mxstep(k + 1);
     map<int, int> mp;
 
     for (int i = 0; i < n; i++)
@@ -31,26 +31,18 @@ void program()
         if (mp.count(v[i]) == 0)
         {
             mp[v[i]] = i;
-            mxstep[v[i]] = i + 1;
-            mxsteptime[v[i]] = 1;
+            mxstep[v[i]].push_back(i + 1);
             continue;
         }
 
         int li = mp[v[i]];
         int step = i - li;
         mp[v[i]] = i;
-        // mxstep[v[i]] = max(mxstep[v[i]], step);
 
-        if (mxstep[v[i]] == step)
-            mxsteptime[v[i]]++;
-        else if (step > mxstep[v[i]])
-        {
-            mxstep[v[i]] = step;
-            mxsteptime[v[i]] = 1;
-        }
+        mxstep[v[i]].push_back(step);
     }
 
-    vector<int> checked(k + 1, false);
+    vector<bool> checked(k + 24, false);
     reverse(v.begin(), v.end());
 
     for (int i = 0; i < n; i++)
@@ -60,37 +52,39 @@ void program()
         checked[v[i]] = true;
         int step = i + 1;
 
-        if (mxstep[v[i]] == step)
-            mxsteptime[v[i]]++;
-        else if (step > mxstep[v[i]])
-        {
-            mxstep[v[i]] = step;
-            mxsteptime[v[i]] = 1;
-        }
+        mxstep[v[i]].push_back(step);
     }
 
-    int mn = n;
+    int mn = n + 1;
 
     for (int i = 1; i <= k; i++)
     {
-        cout << "i : " << i << " mxstep : " << mxstep[i] << " time : " << mxsteptime[i] << endl;
-        mxstep[i]--;
-
-        int step = mxstep[i];
-        int h = step / 2;
-        if (step < mn)
-        {
-            cout << "mn : " << mn << " h " << h << endl;
-            if (mxsteptime[i] == 1)
-                mn = h;
-            else
-                mn = step;
+        if (mxstep[i].size() == 0)
             continue;
+        int mx;
+        for (int j = 0; j < mxstep[i].size(); j++)
+        {
+            mxstep[i][j]--;
+            if (j == 0)
+                mx = mxstep[i][j];
+            mx = max(mx, mxstep[i][j]);
         }
 
-        cout << "h : " << h << endl;
-        if (mxsteptime[i] == 1 && h < mn)
-            mn = h;
+        for (int j = 0; j < mxstep[i].size(); j++)
+            if (mxstep[i][j] == mx)
+            {
+                mxstep[i][j] /= 2;
+                break;
+            }
+
+        for (int j = 0; j < mxstep[i].size(); j++)
+        {
+            if (j == 0)
+                mx = mxstep[i][j];
+            mx = max(mxstep[i][j], mx);
+        }
+
+        mn = min(mx, mn);
     }
 
     cout << mn << endl;

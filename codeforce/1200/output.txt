@@ -1,13 +1,13 @@
-i : 1 mxstep : 6 time : 1
-mn : 6 h 2
-i : 2 mxstep : 5 time : 1
-h : 2
-i : 3 mxstep : 4 time : 1
-h : 1
-i : 4 mxstep : 4 time : 1
-h : 1
-i : 5 mxstep : 5 time : 1
-h : 2
-i : 6 mxstep : 6 time : 1
-h : 2
 1
+1
+2
+0
+1
+0
+0
+1
+1
+1
+0
+1
+0
