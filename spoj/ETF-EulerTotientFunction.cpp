@@ -23,13 +23,10 @@ void buildPhi(int n, vector<int> &phi)
     for (int i = 1; i <= n; i++)
         phi[i] = i;
 
-    for (int i = 2; i <= n; i++)
+    for (int i = 1; i <= n; i++)
     {
-        if (phi[i] == i)
-        {
-            for (int j = i; j <= n; j += i)
-                phi[j] -= phi[j] / i;
-        }
+        for (int j = i + i; j <= n; j += i)
+            phi[j] -= phi[i];
     }
 }
 void program()
