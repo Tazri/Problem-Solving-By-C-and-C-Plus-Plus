@@ -147,3 +147,18 @@ void buildPhi(int n, vector<int> &phi)
     }
 }
 ```
+
+```cpp
+void buildPhiUsingSum(int n, vector<int> &phi)
+{
+    phi.resize(n + 1);
+    for (int i = 1; i <= n; i++)
+        phi[i] = i;
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = i + i; j <= n; j += i)
+            phi[j] -= phi[i];
+    }
+}
+```
