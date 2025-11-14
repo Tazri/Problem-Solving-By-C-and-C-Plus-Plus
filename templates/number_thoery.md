@@ -162,3 +162,21 @@ void buildPhiUsingSum(int n, vector<int> &phi)
     }
 }
 ```
+
+```cpp
+long long modDiv(long long a, long long b, long long p) {
+    long long r = 1;
+    long long e = p - 2;
+    b %= p;
+    a %= p;
+
+
+    while (e) {
+        if (e & 1) r = (r * b) % p;
+        b = (b * b) % p;
+        e >>= 1;
+    }
+
+    return (a * r) % p;
+}
+```
