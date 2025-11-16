@@ -1,0 +1,378 @@
+{
+  // Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "basic template": {
+    "prefix": "#include <iostream>",
+    "body": [
+      "#include <iostream>",
+      "",
+      "using namespace std;",
+      "",
+      "int main(void){",
+      "\t$0",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "Basic template with return 0"
+  },
+  "optimize cin and cout": {
+    "prefix": "#optimize",
+    "body": [
+      "#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)$0"
+    ],
+    "description": "Basic optimize cin and cout"
+  },
+  "fraction": {
+    "prefix": "#fraction",
+    "body": [
+      "#define fraction() cout.unsetf(ios::floatfield); cout.precision(10); cout.setf(ios::fixed,ios::floatfield)$0"
+    ],
+    "description": "fraction"
+  },
+  "competitive template": {
+    "prefix": "#competitive",
+    "body": [
+      "#include<bits/stdc++.h>",
+      "",
+      "using namespace std;",
+      "",
+      "typedef long long ll;",
+      "typedef double dl;",
+      "",
+      "#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)",
+      "#define fraction() cout.unsetf(ios::floatfield); cout.precision(10); cout.setf(ios::fixed,ios::floatfield)",
+      "",
+      "int main()",
+      "{",
+      "\toptimize();",
+      "\t$0",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "basic template for competitive programing"
+  },
+  "include <bits/stdc++.h>": {
+    "prefix": "#include <bits/stdc++.h>",
+    "body": ["#include<bits/stdc++.h>", "$0"],
+    "description": "bits/stdc++"
+  },
+  "split string by word": {
+    "prefix": "#splitstringbyword",
+    "body": [
+      "vector<string> splitStringByWord(string s,string d)",
+      "{",
+      "\tvector<string> result;",
+      "\tsize_t start = 0, end;",
+      "\t",
+      "\twhile ((end = s.find(d, start)) != string::npos)",
+      "\t{",
+      "\t\tresult.push_back(s.substr(start, end - start));",
+      "\t\tstart = end + d.length();",
+      "\t}",
+      "\t",
+      "\tresult.push_back(s.substr(start));",
+      "\treturn result;",
+      "}"
+    ]
+  },
+  "join string by word": {
+    "prefix": "#joinstringbyword",
+    "body": [
+      "string joinStrngByWord(vector<string> strArr, string d)",
+      "{",
+      "\tstring res = \"\";",
+      "\tif (strArr.size() <= 0)",
+      "\t{",
+      "\t\treturn \"\";",
+      "\t}",
+      "\t",
+      "\tif (strArr.size() == 1)",
+      "\t{",
+      "\t\treturn strArr[0];",
+      "\t}",
+      "\t",
+      "\tres += strArr[0];",
+      "\t",
+      "\tfor (int i = 1; i < strArr.size(); i++)",
+      "\t{",
+      "\t\tres += d + strArr[i];",
+      "\t}",
+      "\t",
+      "\treturn res;",
+      "}"
+    ]
+  },
+  "PI": {
+    "prefix": "#pi",
+    "body": "#define PI 3.141592653589793"
+  },
+  "PI Variable": {
+    "prefix": "double pi",
+    "body": "const double PI = 3.141592653589793;"
+  },
+  "Order Set": {
+    "prefix": "#ordered_set",
+    "body": [
+      "#include <ext/pb_ds/assoc_container.hpp>",
+      "#include <ext/pb_ds/tree_policy.hpp>",
+      "using namespace __gnu_pbds;",
+      "",
+      "template <class T>",
+      "using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;",
+      "$0"
+    ]
+  },
+  "Bigmod Power": {
+    "prefix": "#binpow",
+    "body": [
+      "long long binpow(long long a, long long b)",
+      "{",
+      "    long long res = 1;",
+      "    while (b > 0)",
+      "    {",
+      "        if (b & 1)",
+      "            res = res * a;",
+      "        a = a * a;",
+      "        b >>= 1;",
+      "    }",
+      "    return res;",
+      "}"
+    ]
+  },
+  "Int Mod": {
+    "prefix": "#integermod",
+    "body": [
+      "int intMod(int a, int mod)",
+      "{",
+      "    return ((a % mod) + mod) % mod;",
+      "}"
+    ]
+  },
+  "Long Mod": {
+    "prefix": "#longmod",
+    "body": [
+      "long long llmod(long long a, long long mod)",
+      "{",
+      "    return ((a % mod) + mod) % mod;",
+      "}"
+    ]
+  },
+  "Big Mod Power": {
+    "prefix": "#bigmodpow",
+    "body": [
+      "long long modpow(long long a, long long b, long long mod)",
+      "{",
+      "    long long res = 1;",
+      "    a %= mod;",
+      "    while (b > 0)",
+      "    {",
+      "        if (b & 1)",
+      "            res = res * a % mod;",
+      "        a = a * a % mod;",
+      "        b >>= 1;",
+      "    }",
+      "    return res;",
+      "}"
+    ]
+  },
+  "Take Primes": {
+    "prefix": "#takePrimes",
+    "body": [
+      "void takePrimes(int n, vector<int> &primes)",
+      "{",
+      "    if (n < 2)",
+      "        return;",
+      "",
+      "    vector<bool> isPrime(n + 1, true);",
+      "    isPrime[0] = isPrime[1] = false;",
+      "",
+      "    primes.clear();",
+      "    primes.push_back(2);",
+      "",
+      "    for (int i = 3; i * i <= n; i += 2)",
+      "    {",
+      "        if (isPrime[i])",
+      "        {",
+      "            for (int j = i * i; j <= n; j += 2 * i)",
+      "            {",
+      "                isPrime[j] = false;",
+      "            }",
+      "        }",
+      "    }",
+      "",
+      "    for (int i = 3; i <= n; i += 2)",
+      "        if (isPrime[i])",
+      "            primes.push_back(i);",
+      "}"
+    ]
+  },
+  "Smallest Prime Factors": {
+    "prefix": "#build_spf",
+    "body": [
+      "void build_spf(int n, vector<int> &spf)",
+      "{",
+      "    spf.assign(n + 1, 0);",
+      "    for (int i = 2; i <= n; i++)",
+      "        spf[i] = i;",
+      "",
+      "    for (int i = 4; i <= n; i += 2)",
+      "        spf[i] = 2;",
+      "",
+      "    for (int i = 3; i * i <= n; i += 2)",
+      "    {",
+      "        if (spf[i] == i)",
+      "        {",
+      "            for (int j = i * i; j <= n; j += 2 * i)",
+      "            {",
+      "                if (spf[j] == j)",
+      "                    spf[j] = i;",
+      "            }",
+      "        }",
+      "    }",
+      "}"
+    ]
+  },
+  "Number of Divisors": {
+    "prefix": "#build_nod",
+    "body": [
+      "void build_nod(int n, vector<int> &nod)",
+      "{",
+      "    nod.assign(n + 1, 1);",
+      "",
+      "    for (int i = 2; i <= n; i++)",
+      "    {",
+      "        for (int j = i; j <= n; j += i)",
+      "        {",
+      "            nod[j]++;",
+      "        }",
+      "    }",
+      "}"
+    ]
+  },
+  "Number of divisors using spf": {
+    "prefix": "#build_nod_using_spf",
+    "body": [
+      "void build_nod_by_spf(int n, const vector<int> &spf, vector<int> &nod)",
+      "{",
+      "    nod.assign(n + 1, 1);",
+      "",
+      "    for (int i = 2; i <= n; i++)",
+      "    {",
+      "        int x = i;",
+      "        int p = spf[i];",
+      "        int cnt = 0;",
+      "",
+      "        while (x % p == 0)",
+      "        {",
+      "            x /= p;",
+      "            cnt++;",
+      "        }",
+      "",
+      "        nod[i] = nod[x] * (cnt + 1);",
+      "    }",
+      "}"
+    ]
+  },
+  "Sum of divisors": {
+    "prefix": "#build_sod",
+    "body": [
+      "void build_sod(int n, vector<int> &sod)",
+      "{",
+      "    sod.assign(n + 1, 1);",
+      "    sod[0] = 0;",
+      "",
+      "    for (int i = 2; i <= n; i++)",
+      "        for (int j = i; j <= n; j += i)",
+      "            sod[j] += i;",
+      "}"
+    ]
+  },
+  "Xor Till N": {
+    "prefix": "#xor_till_n",
+    "body": [
+      "long long xor_till(long long n)",
+      "{",
+      "    long long r = n % 4;",
+      "    if (r == 0)",
+      "        return n;",
+      "    else if (r == 1)",
+      "        return 1;",
+      "    else if (r == 2)",
+      "        return n + 1;",
+      "    return 0;",
+      "}"
+    ]
+  },
+  "PI 30": {
+    "prefix": "#PI30",
+    "body": ["#define PI30 \"3141592653589793238462643383279\""]
+  },
+  "Build Phi": {
+    "prefix": "#buildPISeive",
+    "body": [
+      "void buildPhi(int n, vector<int> &phi)",
+      "{",
+      "    phi.resize(n + 1);",
+      "    for (int i = 1; i <= n; i++)",
+      "        phi[i] = i;",
+      "",
+      "    for (int i = 2; i <= n; i++)",
+      "    {",
+      "        if (phi[i] == i)",
+      "        {",
+      "            for (int j = i; j <= n; j += i)",
+      "                phi[j] -= phi[j] / i;",
+      "        }",
+      "    }",
+      "}"
+    ]
+  },
+  "Build Phi using Sum": {
+    "prefix": "#buildphisuingsum",
+    "body": [
+      "void buildPhiUsingSum(int n, vector<int> &phi)",
+      "{",
+      "    phi.resize(n + 1);",
+      "    for (int i = 1; i <= n; i++)",
+      "        phi[i] = i;",
+      "",
+      "    for (int i = 1; i <= n; i++)",
+      "    {",
+      "        for (int j = i + i; j <= n; j += i)",
+      "            phi[j] -= phi[i];",
+      "    }",
+      "}"
+    ]
+  },
+  "Mod Inverse": {
+    "prefix": "#modinverse",
+    "body": [
+      "long long modDiv(long long a, long long b, long long p) {",
+      "    long long r = 1;",
+      "    long long e = p - 2;",
+      "    b %= p;",
+      "    a %= p;",
+      "",
+      "",
+      "    while (e) {",
+      "        if (e & 1) r = (r * b) % p;",
+      "        b = (b * b) % p;",
+      "        e >>= 1;",
+      "    }",
+      "",
+      "    return (a * r) % p;",
+      "}"
+    ]
+  }
+}
