@@ -1,141 +1,78 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-typedef long long ll;
-typedef double dl;
-
-#define optimize()                \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
+#define int long long
+#define pinf LLONG_MAX
+#define ninf LLONG_MIN
+#define countBit(x) (int)__builtin_popcount(x)
+#define lsb(x) (int)__builtin_ctzll(x)
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
+#define endl '\n'
+#define PI acos(-1.0)
+#define lcm(a, b) (a / __gcd(a, b) * b)
+#define MOD 1000000007LL
+#define fastio                        \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(0);                       \
     cout.tie(0)
-#define fraction()                \
-    cout.unsetf(ios::floatfield); \
-    cout.precision(10);           \
-    cout.setf(ios::fixed, ios::floatfield)
 
-ll mod = 1e9 + 7;
-
-ll getPow(ll n)
+void BarikSolution()
 {
-    if (n == 0)
-        return 1;
-    vector<ll> t;
-
-    while (n)
+    int n;
+    cin >> n;
+    vector<int> v(n + 1);
+    int totalSum = 0;
+    for (int i = 1; i <= n; i++)
     {
-        if (n & 1)
-        {
-            t.push_back(1);
-            n--;
-        }
-        else
-        {
-            n /= 2;
-            t.push_back(0);
-        }
+        cin >> v[i];
+        totalSum += v[i];
     }
 
-    ll ans = 1;
-
-    reverse(t.begin(), t.end());
-
-    for (ll ti : t)
+    vector<int> prefixSum(n + 1);
+    prefixSum[1] = v[1];
+    for (int i = 2; i <= n; i++)
     {
-        if (ti)
-            ans *= 2;
-        else
-            ans *= ans;
-
-        ans %= mod;
+        prefixSum[i] = v[i] + prefixSum[i - 1];
     }
 
-    return ans %= mod;
-}
+    bool flag = false;
+    int left = -1;
+    int right = -1;
 
-bool isPrevABA(ll i, string s)
-{
-    return s[i] == 'a' && s[i - 1] == 'b' && s[i - 2] == 'a';
-}
-
-bool isABA(ll i, string s)
-{
-    return s[i] == 'a' && s[i + 1] == 'b' && s[i + 2] == 'a';
-}
-
-bool isAB(ll i, string s)
-{
-    return s[i] == 'a' && s[i + 1] == 'b';
-}
-
-void program()
-{
-    string s = "xx";
-    string input;
-    cin >> input;
-    s += input;
-    s += "xx";
-
-    vector<ll> a(s.size(), 0);
-    vector<ll> ab(s.size(), 0);
-    vector<ll> aba(s.size(), 0);
-
-    // cout << s << endl;
-    for (ll i = 2; s[i] != 'x'; i++)
+    for (int l = 1; l < n - 1; l++)
     {
-        if (s[i] == 'a')
-            a[i]++;
-        if (s[i] == 'b' && s[i - 1] == 'a')
-            ab[i]++;
-        if (s[i] == 'a' && s[i - 1] == 'b' && s[i - 2] == 'a')
-            aba[i]++;
-    }
-
-    for (ll i = 2; s[i] != 'x'; i++)
-    {
-        a[i] += a[i - 1];
-        a[i] %= mod;
-        ab[i] += ab[i - 1];
-        ab[i] %= mod;
-        aba[i] += aba[i - 1];
-        aba[i] %= mod;
-    }
-
-    ll ans = 0;
-
-    for (ll i = 2; s[i] != 'x'; i++)
-    {
-        if (s[i] == 'a')
+        int leftSum = prefixSum[l];
+        for (int r = l + 1; r <= n - 1; r++)
         {
-            ll can = getPow(a[i - 1]);
-            ans += can;
-            ans %= mod;
-        }
-        if (s[i] == 'b')
-        {
-            ll can = getPow(a[i - 1]) - 1;
-            ans += can;
-            ans += aba[i - 1];
-            ans %= mod;
-        }
+            int middSum = prefixSum[r] - prefixSum[l];
+            int rightSum = totalSum - (leftSum + middSum);
 
-        if (s[i] == 'b' && s[i - 1] == 'a')
-        {
-            ll can = getPow(ab[i - 3]) - 1;
-            ans += can;
-            ans %= mod;
+            int m1 = leftSum % 3;
+            int m2 = middSum % 3;
+            int m3 = rightSum % 3;
+
+            if ((m1 != m2 && m2 != m3 && m3 != m1) || (m1 == m2 && m2 == m3))
+            {
+                cout << l << " " << r << endl;
+                return;
+            }
         }
     }
-
-    cout << ans % mod << endl;
+    cout << 0 << " " << 0 << endl;
 }
 
-int main()
+signed main()
 {
-    optimize();
-    int t;
-    cin >> t;
-    while (t--)
-        program();
+    fastio;
+
+    /* amr main logic */
+    int testcase;
+    cin >> testcase;
+    while (testcase--)
+    {
+        BarikSolution();
+    }
+
     return 0;
 }
