@@ -50,25 +50,38 @@ void program()
 
     vector<ll> v(n);
 
-    ll mx = v[0];
     for (ll i = 0; i < n; i++)
-    {
         cin >> v[i];
 
-        if (i == 0)
-            mx = v[i];
+    if (k == 1)
+    {
+        vector<bool> has(n, false);
 
-        mx = max(mx, v[i]);
+        for (ll vi : v)
+        {
+            if (vi < n)
+                has[vi] = true;
+        }
+
+        for (int i = 0; i < n; i++)
+            if (!has[i])
+            {
+                cout << i << endl;
+                return;
+            }
+
+        cout << n << endl;
+        return;
     }
 
     ll ans = -1;
 
-    ll left = 0;
-    ll right = mx;
+    int left = 0;
+    int right = n;
 
     while (left <= right)
     {
-        ll mid = left + (right - left) / 2;
+        int mid = left + ((right - left) / 2);
 
         if (isPossible(v, k, mid))
         {

@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/1907/C
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -18,20 +19,29 @@ void program()
 {
     int n;
     cin >> n;
-    vector<int> v(n);
+    string s;
+    cin >> s;
 
-    for (int i = 0; i < n; i++)
-        cin >> v[i];
-    int mx = 0;
-    int nonZero = 0;
-    for (int vi : v)
+    map<char, int> mp;
+
+    for (char ch : s)
+        mp[ch]++;
+
+    int mxf = 0;
+    for (char ch = 'a'; ch <= 'z'; ch++)
+        mxf = max(mxf, mp[ch]);
+
+    if (mxf > n / 2)
     {
-        if (vi)
-            nonZero++;
-        mx = max(mx, vi);
+        int ans = mxf - (n - mxf);
+        cout << ans << endl;
+        return;
     }
 
-    cout << min(mx, nonZero) << endl;
+    if (n % 2 == 0)
+        cout << 0 << endl;
+    else
+        cout << 1 << endl;
 }
 
 int main()
