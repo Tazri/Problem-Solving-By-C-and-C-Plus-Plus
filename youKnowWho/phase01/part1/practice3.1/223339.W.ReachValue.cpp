@@ -1,3 +1,4 @@
+// link : https://codeforces.com/group/MWSDmqGsZm/contest/223339/problem/W
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -13,31 +14,29 @@ typedef double dl;
     cout.unsetf(ios::floatfield); \
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
-
-int mxSum(vector<int> v)
+#define int ll
+bool isPossible(int n, int curr = 1)
 {
-    int n = v.size();
-    vector<int> pre(n + 1, 0);
-    for (int i = 0; i < n; i++)
-        pre[i + 1] = v[i];
+    if (curr == n)
+        return true;
 
-    for (int i = 1; i <= n; i++)
-        pre[i] += pre[i - 1];
+    if (curr > n)
+        return false;
+
+    return isPossible(n, curr * 10) || isPossible(n, curr * 20);
 }
 
 void program()
 {
     int n;
     cin >> n;
-    vector<int> v(n);
-
-    for (int &vi : v)
-        cin >> vi;
-
-    mxSum(v);
+    if (isPossible(n))
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 
-int main()
+int32_t main()
 {
     optimize();
     int t;
