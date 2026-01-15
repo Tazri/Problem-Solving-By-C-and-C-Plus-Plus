@@ -1,4 +1,9 @@
+4
+4
+1 2 1 2
 3
-olleh !dlrow
-m'I morf .udh
-I ekil .mca
+1 1 1
+4
+1 2 3 4
+5
+5 1 4 2 1
