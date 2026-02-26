@@ -4,6 +4,7 @@ using namespace std;
 
 typedef long long ll;
 typedef double dl;
+#define endl '\n'
 
 #define optimize()                \
     ios_base::sync_with_stdio(0); \
@@ -16,20 +17,23 @@ typedef double dl;
 
 void program()
 {
-    int n;
-    cin >> n;
+    int n, m, d;
+    cin >> n >> m >> d;
 
-    int ans = ((n - 1) * (n - 1)) + n;
+    int up = d / m;
+    int per = up + 1;
 
+    int ans = (n + per - 1) / per;
     cout << ans << endl;
 }
 
 int32_t main()
 {
     optimize();
-    // int t;
-    // cin >> t;
-    // while (t--)
-    program();
+
+    int t = 1;
+    cin >> t;
+    while (t--)
+        program();
     return 0;
 }
