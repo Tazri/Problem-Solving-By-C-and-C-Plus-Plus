@@ -1,6 +1,3 @@
-## Template for problem solving :
-
-```jsx
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -33,4 +30,3 @@ int32_t main()
         _DIBBA();
     return 0;
 }
-```

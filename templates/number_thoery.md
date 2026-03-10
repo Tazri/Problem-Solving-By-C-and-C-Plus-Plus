@@ -1,7 +1,7 @@
 ## Big Mod Exponention
 
 ```cpp
-long long modpow(long long a, long long b, long long mod)
+long long bigmod(long long a, long long b, long long mod)
 {
     long long res = 1;
     a %= mod;
@@ -12,6 +12,70 @@ long long modpow(long long a, long long b, long long mod)
         a = a * a % mod;
         b >>= 1;
     }
+    return res;
+}
+```
+
+## Multiplication Mod (MulMod)
+
+```cpp
+long long mulmod(long long a, long long b, long long mod)
+{
+    a %= mod;
+    long long res = 0;
+
+    while (b > 0)
+    {
+        if (b & 1)
+        {
+            res += a;
+            if (res >= mod) res -= mod;
+        }
+
+        a <<= 1;
+        if (a >= mod) a %= mod;
+
+        b >>= 1;
+    }
+
+    return res;
+}
+```
+
+## Bigmod + Mulmod
+
+```cpp
+long long bigmodWithMulmod(long long a, long long b, long long mod)
+{
+    auto mul = [&](long long x, long long y)
+    {
+        long long res = 0;
+        x %= mod;
+
+        while (y)
+        {
+            if (y & 1)
+                res = (res + x) % mod;
+
+            x = (x + x) % mod;
+            y >>= 1;
+        }
+
+        return res;
+    };
+
+    long long res = 1 % mod;
+    a %= mod;
+
+    while (b)
+    {
+        if (b & 1)
+            res = mul(res, a);
+
+        a = mul(a, a);
+        b >>= 1;
+    }
+
     return res;
 }
 ```

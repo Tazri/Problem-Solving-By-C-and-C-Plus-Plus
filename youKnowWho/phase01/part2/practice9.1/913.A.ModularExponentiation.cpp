@@ -1,6 +1,5 @@
-## Template for problem solving :
+// link : https://codeforces.com/problemset/problem/913/A
 
-```jsx
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -9,28 +8,41 @@ typedef long long ll;
 typedef double dl;
 #define endl '\n'
 
-#define _GORIBER_TURBO_MODE_ON()  \
+#define optimize()                \
     ios_base::sync_with_stdio(0); \
     cin.tie(0);                   \
-    cout.tie(0);
-
+    cout.tie(0)
 #define fraction()                \
     cout.unsetf(ios::floatfield); \
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
-void _DIBBA()
+#define int ll
+
+void program()
 {
+    int n, m;
+    cin >> n >> m;
+    int d = 1;
+    int limit = (ll)1e8;
+
+    for (int i = 1; i <= n; i++)
+    {
+        d *= 2;
+        if (d > limit)
+            break;
+    }
+
+    cout << m % d << endl;
 }
 
 int32_t main()
 {
-    _GORIBER_TURBO_MODE_ON();
+    optimize();
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
-        _DIBBA();
+        program();
     return 0;
 }
-```

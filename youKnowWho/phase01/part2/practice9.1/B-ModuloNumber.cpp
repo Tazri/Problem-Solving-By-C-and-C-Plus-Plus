@@ -1,6 +1,3 @@
-## Template for problem solving :
-
-```jsx
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -9,28 +6,35 @@ typedef long long ll;
 typedef double dl;
 #define endl '\n'
 
-#define _GORIBER_TURBO_MODE_ON()  \
+#define optimize()                \
     ios_base::sync_with_stdio(0); \
     cin.tie(0);                   \
-    cout.tie(0);
-
+    cout.tie(0)
 #define fraction()                \
     cout.unsetf(ios::floatfield); \
     cout.precision(10);           \
     cout.setf(ios::fixed, ios::floatfield)
 
-void _DIBBA()
+#define int ll
+int mod = 998244353;
+
+void program()
 {
+    int n;
+    cin >> n;
+
+    int x = ((n % mod) + mod) % mod;
+
+    cout << x << endl;
 }
 
 int32_t main()
 {
-    _GORIBER_TURBO_MODE_ON();
+    optimize();
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
-        _DIBBA();
+        program();
     return 0;
 }
-```

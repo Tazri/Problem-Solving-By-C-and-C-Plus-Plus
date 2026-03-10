@@ -1,53 +1,44 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
 
-using namespace std;
-
-typedef long long ll;
-typedef double dl;
-#define endl '\n'
-
-#define optimize()                \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0)
-#define fraction()                \
-    cout.unsetf(ios::floatfield); \
-    cout.precision(10);           \
-    cout.setf(ios::fixed, ios::floatfield)
-
-void program()
+int main()
 {
-    ll n;
-    cin >> n;
-    vector<ll> prefix(n + 1);
+    int t;
+    scanf("%d", &t);
 
-    for (ll i = 1; i <= n; i++)
-    {
-        cin >> prefix[i];
-        prefix[i] ^= prefix[i - 1];
-    }
-
-    ll ans = 0;
-
-    for (ll l = 1; l <= n; l++)
-    {
-        for (ll r = l; r <= n; r++)
-        {
-            ll xr = prefix[r] ^ prefix[l - 1];
-            ans += xr;
-        }
-    }
-
-    cout << ans << endl;
-}
-
-int32_t main()
-{
-    optimize();
-
-    ll t = 1;
-    cin >> t;
     while (t--)
-        program();
+    {
+        int n;
+        scanf("%d", &n);
+        int arr[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            scanf("%d", &arr[i]);
+        }
+
+        // find the max
+        int max = arr[0];
+
+        for (int i = 0; i < n; i++)
+        {
+            if (arr[i] > max)
+            {
+                max = arr[i];
+            }
+        }
+
+        // cnt max
+        int cnt = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (arr[i] == max)
+            {
+                cnt = cnt + 1;
+            }
+        }
+
+        printf("%d\n", cnt);
+    }
+
     return 0;
 }
