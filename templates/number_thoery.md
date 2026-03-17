@@ -80,6 +80,21 @@ long long bigmodWithMulmod(long long a, long long b, long long mod)
 }
 ```
 
+## Inverse
+
+```cpp
+int inverse(int b, int mod)
+{
+    return bigmod(b, mod - 2, mod);
+}
+```
+
+```cpp
+// main thing in inverse
+(a/b) mod m = x;
+(b*x)mod m = a mod m;
+```
+
 ## Take Primes
 
 ```cpp

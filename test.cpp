@@ -1,28 +1,58 @@
-#include <stdio.h>
+#include <bits/stdc++.h>
 
-// take input n and print square of n for multple test case -> t
+using namespace std;
 
-void testcase()
+typedef long long ll;
+typedef double dl;
+#define endl '\n'
+
+#define _GORIBER_TURBO_MODE_ON()  \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+
+// find the length of biggest sub array that all element are equal
+
+void _DIBBA(int _DIBBA_NO)
 {
     int n;
-    scanf("%d", &n);
+    cin >> n;
+    vector<int> v(n);
 
-    if (n == 1)
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+
+    // a0 a1 a2 a3 a4
+
+    int size = 1;
+
+    int mx = 0;
+
+    for (int i = 1; i < n; i++)
     {
-        printf("1\n");
-        return;
+        if (v[i] == v[i - 1])
+        {
+            size++;
+        }
+        else
+        {
+            mx = max(mx, size);
+            size = 1;
+        }
     }
-    printf("%d\n", n * n);
+
+    mx = max(mx, size);
+
+    cout << mx << endl;
 }
 
-int main()
+int32_t main()
 {
-    int t;
-    scanf("%d", &t);
+    _GORIBER_TURBO_MODE_ON();
 
-    while (t--)
-    {
-        testcase();
-    }
+    int t = 1;
+    // cin >> t;
+    for (int i = 1; i <= t; i++)
+        _DIBBA(i);
     return 0;
 }
