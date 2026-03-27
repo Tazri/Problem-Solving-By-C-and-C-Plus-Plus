@@ -259,3 +259,31 @@ long long modDiv(long long a, long long b, long long p) {
     return (a * r) % p;
 }
 ```
+
+## Lengendre
+
+```cpp
+
+int legendre(int n, int p)
+{
+    int cnt = 0;
+
+    while (n)
+    {
+        cnt += (n / p);
+        n /= p;
+    }
+
+    return cnt;
+}
+
+```
+
+## Mulmod using int128
+
+```cpp
+long long mulmod128(long long a, long long b, long long mod)
+{
+    return (long long)((__int128)a * b % mod);
+}
+```
