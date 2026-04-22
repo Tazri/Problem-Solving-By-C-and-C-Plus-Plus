@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/2187/A
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -20,28 +21,13 @@ void program()
     cin >> n;
     vector<int> v(n);
     vector<int> sv(n);
-    int mn = 0;
-    int mx = 0;
     for (int i = 0; i < n; i++)
     {
         cin >> v[i];
         sv[i] = v[i];
     }
+
     sort(sv.begin(), sv.end());
-
-    for (int i = 0; i < n; i++)
-    {
-        if (sv[i] == v[i])
-            continue;
-        if (i == 0)
-        {
-            mn = v[i];
-            mx = v[i];
-        }
-
-        mn = min(v[i], mn);
-        mx = max(v[i], mx);
-    }
 
     bool sorted = true;
     for (int i = 1; i < n; i++)
@@ -57,22 +43,21 @@ void program()
         return;
     }
 
-    int ans = 0;
+    int ans = -1;
+    int mn = sv[0];
+    int mx = sv.back();
+
     for (int i = 0; i < n; i++)
     {
-        int a = v[i];
-        int b = sv[i];
-
-        if (a == b)
+        if (v[i] == sv[i])
             continue;
 
-        int x = min({abs(a - mn), abs(b - mx)});
+        int x = max(v[i] - mn, mx - v[i]);
 
-        if (ans == 0)
+        if (ans == -1)
             ans = x;
-        ans = max(ans, x);
+        ans = min(ans, x);
     }
-
     cout << ans << endl;
 }
 

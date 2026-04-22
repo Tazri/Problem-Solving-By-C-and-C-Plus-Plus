@@ -1,58 +1,33 @@
+// input array and print it reverse
 #include <bits/stdc++.h>
 
 using namespace std;
 
-typedef long long ll;
-typedef double dl;
-#define endl '\n'
-
-#define _GORIBER_TURBO_MODE_ON()  \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0);
-
-// find the length of biggest sub array that all element are equal
-
-void _DIBBA(int _DIBBA_NO)
+int main()
 {
-    int n;
+    int n; // O(1) space
     cin >> n;
-    vector<int> v(n);
 
-    for (int i = 0; i < n; i++)
-        cin >> v[i];
+    int arr[n]; // O(n) space
 
-    // a0 a1 a2 a3 a4
+    for (int i = 0; i < n; i++) // O(1) space
+        cin >> arr[i];
 
-    int size = 1;
-
-    int mx = 0;
-
-    for (int i = 1; i < n; i++)
+    int l = 0, r = n - 1; // O(2) space
+    while (l <= r)
     {
-        if (v[i] == v[i - 1])
-        {
-            size++;
-        }
-        else
-        {
-            mx = max(mx, size);
-            size = 1;
-        }
+        swap(arr[l], arr[r]);
+
+        l++;
+        r--;
     }
 
-    mx = max(mx, size);
+    for (int i = 0; i < n; i++) // O(1) space
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
 
-    cout << mx << endl;
-}
-
-int32_t main()
-{
-    _GORIBER_TURBO_MODE_ON();
-
-    int t = 1;
-    // cin >> t;
-    for (int i = 1; i <= t; i++)
-        _DIBBA(i);
+    // total : O(1+n+1+2+1) = O(n+5) = O(1) space complexity
     return 0;
 }
