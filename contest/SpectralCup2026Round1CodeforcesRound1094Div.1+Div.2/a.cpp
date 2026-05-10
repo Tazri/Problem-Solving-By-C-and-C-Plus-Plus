@@ -13,6 +13,23 @@ typedef double dl;
 
 void _DIBBA(int _DIBBA_NO)
 {
+    int n;
+    cin >> n;
+    vector<int> v(n);
+
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+
+    for (int &vi : v)
+    {
+        if (vi == 100)
+        {
+            cout << "YES" << endl;
+            return;
+        }
+    }
+
+    cout << "NO" << endl;
 }
 
 int32_t main()
