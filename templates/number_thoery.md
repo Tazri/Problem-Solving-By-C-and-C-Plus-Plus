@@ -287,3 +287,54 @@ long long mulmod128(long long a, long long b, long long mod)
     return (long long)((__int128)a * b % mod);
 }
 ```
+
+## build inverse factorial
+
+```cpp
+ll mod = 1e9 + 7;
+ll SZ = 2e5 + 5;
+
+vector<ll> fact(SZ);
+vector<ll> ifact(SZ);
+
+long long bigmod(long long a, long long b, long long mod)
+{
+    long long res = 1;
+    a %= mod;
+    while (b > 0)
+    {
+        if (b & 1)
+            res = res * a % mod;
+        a = a * a % mod;
+        b >>= 1;
+    }
+    return res;
+}
+
+void build()
+{
+    fact[0] = 1;
+    for (int i = 1; i < SZ; i++)
+    {
+        fact[i] = fact[i - 1] * i % mod;
+    }
+
+    ifact[SZ - 1] = bigmod(fact[SZ - 1], mod - 2, mod);
+
+    for (int i = SZ - 2; i >= 0; i--)
+    {
+        ifact[i] = ifact[i + 1] * (i + 1) % mod;
+    }
+}
+```
+
+## NCR
+
+```cpp
+ll nCr(ll n, ll r)
+{
+    if (r > n || r < 0)
+        return 0;
+    return (fact[n] * ifact[r] % mod) * ifact[n - r] % mod;
+}
+```

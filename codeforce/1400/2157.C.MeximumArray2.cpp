@@ -1,3 +1,4 @@
+// link : https://codeforces.com/problemset/problem/2157/C
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -66,6 +67,7 @@ void _DIBBA(int _DIBBA_NO)
         rangex[i].second = r;
     }
 
+    sort(rangex.begin(), rangex.end());
     vector<bool> change(n + 1, false);
 
     for (pair<int, int> p : rangex)

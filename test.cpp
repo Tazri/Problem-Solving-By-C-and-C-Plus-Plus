@@ -1,33 +1,28 @@
-// input array and print it reverse
 #include <bits/stdc++.h>
 
 using namespace std;
 
-int main()
+typedef long long ll;
+typedef double dl;
+#define endl '\n'
+
+#define _GORIBER_TURBO_MODE_ON()  \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+
+void _DIBBA(int _DIBBA_NO)
 {
-    int n; // O(1) space
-    cin >> n;
+    cout << "C2" << endl;
+}
 
-    int arr[n]; // O(n) space
+int32_t main()
+{
+    _GORIBER_TURBO_MODE_ON();
 
-    for (int i = 0; i < n; i++) // O(1) space
-        cin >> arr[i];
-
-    int l = 0, r = n - 1; // O(2) space
-    while (l <= r)
-    {
-        swap(arr[l], arr[r]);
-
-        l++;
-        r--;
-    }
-
-    for (int i = 0; i < n; i++) // O(1) space
-    {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-
-    // total : O(1+n+1+2+1) = O(n+5) = O(1) space complexity
+    int t = 1;
+    // cin >> t;
+    for (int i = 1; i <= t; i++)
+        _DIBBA(i);
     return 0;
 }

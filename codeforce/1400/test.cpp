@@ -13,6 +13,148 @@ typedef double dl;
 
 #define int ll
 
+// Miller Rabin Primality Test
+// deterministic for all 64-bit integers
+
+// using merge sort
+// ans[i].first  = number of bigger elements before i
+// ans[i].second = number of smaller elements before i
+
+struct SegTree
+{
+    struct Node
+    {
+        long long val;
+    };
+
+    int n;
+    vector<Node> st;
+
+    SegTree(int n)
+    {
+        this->n = n;
+        st.assign(4 * n, {0});
+    }
+
+    // =========================
+    // CHANGE HERE FOR OPERATION
+    // =========================
+
+    Node merge(Node a, Node b)
+    {
+
+        Node res;
+
+        // SUM:
+        // res.val = a.val + b.val;
+
+        // MAX:
+        // res.val = max(a.val, b.val);
+
+        // MIN:
+        // res.val = min(a.val, b.val);
+
+        // XOR:
+        // res.val = (a.val ^ b.val);
+
+        return res;
+    }
+
+    // =========================
+    // CHANGE HERE FOR LEAF INIT
+    // =========================
+
+    Node single(long long v)
+    {
+        Node res;
+
+        // just store value
+        res.val = v;
+
+        return res;
+    }
+
+    void build(vector<long long> &a, int p, int l, int r)
+    {
+        if (l == r)
+        {
+            st[p] = single(a[l]);
+            return;
+        }
+
+        int mid = (l + r) / 2;
+
+        build(a, p * 2, l, mid);
+        build(a, p * 2 + 1, mid + 1, r);
+
+        st[p] = merge(st[p * 2], st[p * 2 + 1]);
+    }
+
+    void update(int p, int l, int r, int idx, long long val)
+    {
+        if (l == r)
+        {
+            st[p] = single(val);
+            return;
+        }
+
+        int mid = (l + r) / 2;
+
+        if (idx <= mid)
+            update(p * 2, l, mid, idx, val);
+        else
+            update(p * 2 + 1, mid + 1, r, idx, val);
+
+        st[p] = merge(st[p * 2], st[p * 2 + 1]);
+    }
+
+    Node query(int p, int l, int r, int i, int j)
+    {
+        if (j < l || r < i)
+        {
+            // =========================
+            // CHANGE HERE (identity element)
+            // =========================
+
+            Node res;
+
+            // SUM → 0
+            // MAX → -INF
+            // MIN → +INF
+            // XOR → 0
+
+            res.val = 0;
+            return res;
+        }
+
+        if (i <= l && r <= j)
+            return st[p];
+
+        int mid = (l + r) / 2;
+
+        Node left = query(p * 2, l, mid, i, j);
+        Node right = query(p * 2 + 1, mid + 1, r, i, j);
+
+        return merge(left, right);
+    }
+
+    // wrappers
+    void build(vector<long long> &a)
+    {
+        build(a, 1, 0, n - 1);
+    }
+
+    void update(int idx, long long val)
+    {
+        update(1, 0, n - 1, idx, val);
+    }
+
+    long long query(int l, int r)
+    {
+        return query(1, 0, n - 1, l, r).val;
+    }
+};
+
 int f1(vector<int> v, int k)
 {
     int n = v.size();
