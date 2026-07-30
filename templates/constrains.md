@@ -68,4 +68,16 @@ __lg(x); // floor(log2(x))
 
 // positive modulo
 ((x % mod) + mod) % mod
+
+// taking string input
+int n;
+cin >> n;
+cin.ignore();      // remove one newline
+string s;
+getline(cin, s);
+// robust way
+int n;
+cin >> n;
+string s;
+getline(cin >> ws, s);
 ```

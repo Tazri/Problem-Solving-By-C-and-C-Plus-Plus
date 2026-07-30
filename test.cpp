@@ -1,28 +1,43 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-typedef long long ll;
-typedef double dl;
-#define endl '\n'
-
-#define _GORIBER_TURBO_MODE_ON()  \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0);
-
-void _DIBBA(int _DIBBA_NO)
+void solve()
 {
-    cout << "C2" << endl;
+
+    long long n, q, l, r, k, sum = 0;
+    cin >> n >> q;
+
+    vector<long long> a(n);
+    for (long long i = 0; i < n; i++)
+        cin >> a[i];
+
+    for (long long i = 0; i < q; i++)
+    {
+        cin >> l >> r >> k;
+        sum = 0;
+        vector<long long> p = a;
+        for (long long i = l - 1; i < r; i++)
+            p[i] = k;
+
+        for (long long i = 0; i < n; i++)
+        {
+            // cout<<p[i]<<" ";
+            sum += p[i];
+        }
+        // cout<<endl;
+        // cout<<sum<<endl;
+
+        if (sum % 2 == 0)
+            cout << "NO" << endl;
+        else
+            cout << "YES" << endl;
+    }
 }
-
-int32_t main()
+int main()
 {
-    _GORIBER_TURBO_MODE_ON();
-
-    int t = 1;
-    // cin >> t;
-    for (int i = 1; i <= t; i++)
-        _DIBBA(i);
+    long long t;
+    cin >> t;
+    while (t--)
+        solve();
     return 0;
 }
