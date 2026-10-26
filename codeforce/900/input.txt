@@ -1,4 +1,2 @@
-3
-aa
-abacaba
-xdd
+1
+7
